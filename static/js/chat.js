@@ -21,13 +21,13 @@ document.cookie = `session_id=${storedSession}; path=/; max-age=86400; SameSite=
 
 // Public Streams & Official Department Tabs
 const PUBLIC_STREAMS = {
-  "main": { id: "main", name: "Public Board", title: "Pesitm Anonymous Board", subtitle: "100% Anonymous // No registration // Speak freely", icon: "globe" },
-  "cse": { id: "cse", name: "CSE Stream", title: "Computer Science & Engineering", subtitle: "Anonymous Stream for CSE // Code, projects & campus banter", icon: "terminal" },
-  "ece": { id: "ece", name: "Electronics Stream", title: "Electronics & Communication", subtitle: "Anonymous Stream for ECE & EEE // Signals, silicon & chatter", icon: "zap" },
-  "mech": { id: "mech", name: "Mechanical Stream", title: "Mechanical Engineering", subtitle: "Anonymous Stream for Mech & Auto // Gears, CAD & campus talk", icon: "tool" },
-  "civil": { id: "civil", name: "Civil Stream", title: "Civil Engineering", subtitle: "Anonymous Stream for Civil & Infra // Structures & college life", icon: "home" },
-  "faculty": { id: "faculty", name: "Faculty", title: "Faculty & Academics", subtitle: "Anonymous Discussion on Academics, Exams & Professors", icon: "book-open" },
-  "hostel": { id: "hostel", name: "Hostel", title: "Hostel & Campus Life", subtitle: "Anonymous Discussion on Hostels, Mess & Late Night Hangouts", icon: "moon" }
+  "main": { id: "main", name: "Public Board", title: "Pesitm Anonymous Board", subtitle: "100% Anonymous // No registration // Speak freely", icon: "broadcast-beacon" },
+  "cse": { id: "cse", name: "CSE Stream", title: "Computer Science & Engineering", subtitle: "Anonymous Stream for CSE // Code, projects & campus banter", icon: "cyber-core" },
+  "ece": { id: "ece", name: "Electronics Stream", title: "Electronics & Communication", subtitle: "Anonymous Stream for ECE & EEE // Signals, silicon & chatter", icon: "rf-wave" },
+  "mech": { id: "mech", name: "Mechanical Stream", title: "Mechanical Engineering", subtitle: "Anonymous Stream for Mech & Auto // Gears, CAD & campus talk", icon: "dual-gears" },
+  "civil": { id: "civil", name: "Civil Stream", title: "Civil Engineering", subtitle: "Anonymous Stream for Civil & Infra // Structures & college life", icon: "structural-arch" },
+  "faculty": { id: "faculty", name: "Faculty", title: "Faculty & Academics", subtitle: "Anonymous Discussion on Academics, Exams & Professors", icon: "academic-crest" },
+  "hostel": { id: "hostel", name: "Hostel", title: "Hostel & Campus Life", subtitle: "Anonymous Discussion on Hostels, Mess & Late Night Hangouts", icon: "night-lantern" }
 };
 
 // Rooms state
@@ -155,12 +155,12 @@ function handleWSEvent(data) {
       if (titleEl) titleEl.innerText = "Random Match Request 🎲";
       if (textEl) textEl.innerText = "wants to chat privately with you! (Matched via Find Someone)";
       if (acceptBtn) acceptBtn.innerText = "Accept & Chat";
-      if (iconEl) iconEl.innerHTML = renderIcon('shuffle', 'ui-icon-md');
+      if (iconEl) iconEl.innerHTML = renderIcon('serendipity', 'ui-icon-md');
     } else if (data.is_group) {
       if (titleEl) titleEl.innerText = "Group Chat Invitation";
       if (textEl) textEl.innerHTML = `invited you to join <strong>${escapeHtml(data.room_name || 'the private group')}</strong>.`;
       if (acceptBtn) acceptBtn.innerText = "Accept & Join";
-      if (iconEl) iconEl.innerHTML = renderIcon('users', 'ui-icon-md');
+      if (iconEl) iconEl.innerHTML = renderIcon('constellation', 'ui-icon-md');
     } else {
       if (titleEl) titleEl.innerText = "Private Chat Request";
       if (textEl) textEl.innerText = "wants to start a 1-on-1 private chat with you.";
@@ -1674,7 +1674,7 @@ function showUserProfileModal(publicId, anonName, avatarUrl, sciName = "", ip = 
         if (!isAlreadyMember) {
           extraGroupBtn = `
             <button class="btn-start-dm" style="background:#10b981; margin-top:8px;" onclick="addUserToRoom('${publicId}')">
-              ${renderIcon('users', 'ui-icon-sm')}
+              ${renderIcon('constellation', 'ui-icon-sm')}
               <span>Invite to Current Group</span>
             </button>
           `;
@@ -1827,12 +1827,12 @@ function renderUserGroupsList(filterQuery = "") {
       container.innerHTML = `
         <div style="text-align:center; padding:32px 16px; color:var(--text-date);">
           <div style="margin-bottom:8px; opacity:0.6;">
-            ${renderIcon('users', 'ui-icon-lg')}
+            ${renderIcon('constellation', 'ui-icon-lg')}
           </div>
           <div style="font-size:13.5px; font-weight:600; color:var(--text-main); margin-bottom:4px;">No Active Private Groups</div>
           <div style="font-size:12px; max-width:280px; margin:0 auto 16px; line-height:1.4;">You aren't in any private group chats right now. Match with someone or invite users to chat privately!</div>
           <button class="btn-top" onclick="closeModals(); findSomeoneToChat();" style="font-size:12px; padding:6px 14px; background:var(--btn-submit); color:var(--btn-submit-text, #fff);">
-            ${renderIcon('shuffle', 'ui-icon-xs')} Match in Find Someone
+            ${renderIcon('serendipity', 'ui-icon-xs')} Match in Find Someone
           </button>
         </div>
       `;
