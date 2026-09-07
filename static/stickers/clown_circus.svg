@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <!-- Clown curly hair -->
+  <circle cx="24" cy="45" r="14" fill="#3b82f6"/>
+  <circle cx="20" cy="62" r="12" fill="#3b82f6"/>
+  <circle cx="96" cy="45" r="14" fill="#ef4444"/>
+  <circle cx="100" cy="62" r="12" fill="#ef4444"/>
+  <!-- White face -->
+  <circle cx="60" cy="60" r="38" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+  <!-- Blue teardrop makeup under eyes -->
+  <polygon points="45,46 41,56 49,56" fill="#06b6d4"/>
+  <polygon points="75,46 71,56 79,56" fill="#06b6d4"/>
+  <!-- Eyes -->
+  <circle cx="45" cy="48" r="4" fill="#0f172a"/>
+  <circle cx="75" cy="48" r="4" fill="#0f172a"/>
+  <!-- Huge Red Clown Nose -->
+  <circle cx="60" cy="62" r="11" fill="#dc2626" stroke="#991b1b" stroke-width="2"/>
+  <circle cx="56" cy="58" r="3" fill="#fff" opacity="0.7"/>
+  <!-- Giant Clown Smile -->
+  <path d="M38 72 Q60 100 82 72" stroke="#dc2626" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <text x="60" y="110" font-family="Impact, sans-serif" font-size="12" fill="#dc2626" text-anchor="middle" letter-spacing="1">CLOWNERY</text>
+</svg>

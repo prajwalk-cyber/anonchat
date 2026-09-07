@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="mono-noir">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Pesitm Anonymous Board</title>
+  <link rel="stylesheet" href="/static/css/style.css?v={{ cache_v }}">
+</head>
+<body>
+
+  <!-- Reusable Vector Icon Sprite Sheet (Zero-CDN, High-DPI, Accessible SVG) -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <defs>
+      <symbol id="icon-crown" viewBox="0 0 24 24">
+        <path d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7z"/>
+        <path d="M4 20h16"/>
+      </symbol>
+      <symbol id="icon-globe" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10"/>
+        <line x1="2" y1="12" x2="22" y2="12"/>
+        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+      </symbol>
+      <symbol id="icon-lock" viewBox="0 0 24 24">
+        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+      </symbol>
+      <symbol id="icon-user-plus" viewBox="0 0 24 24">
+        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+        <circle cx="8.5" cy="7" r="4"/>
+        <line x1="20" y1="8" x2="20" y2="14"/>
+        <line x1="23" y1="11" x2="17" y2="11"/>
+      </symbol>
+      <symbol id="icon-log-out" viewBox="0 0 24 24">
+        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+        <polyline points="16 17 21 12 16 7"/>
+        <line x1="21" y1="12" x2="9" y2="12"/>
+      </symbol>
+      <symbol id="icon-arrow-left" viewBox="0 0 24 24">
+        <line x1="19" y1="12" x2="5" y2="12"/>
+        <polyline points="12 19 5 12 12 5"/>
+      </symbol>
+      <symbol id="icon-megaphone" viewBox="0 0 24 24">
+        <path d="m3 11 18-5v12L3 14v-3z"/>
+        <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/>
+      </symbol>
+      <symbol id="icon-x" viewBox="0 0 24 24">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </symbol>
+      <symbol id="icon-reply" viewBox="0 0 24 24">
+        <polyline points="9 14 4 9 9 4"/>
+        <path d="M20 20v-7a4 4 0 0 0-4-4H4"/>
+      </symbol>
+      <symbol id="icon-paperclip" viewBox="0 0 24 24">
+        <path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/>
+      </symbol>
+      <symbol id="icon-send" viewBox="0 0 24 24">
+        <line x1="22" y1="2" x2="11" y2="13"/>
+        <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+      </symbol>
+      <symbol id="icon-smile" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+        <line x1="9" y1="9" x2="9.01" y2="9"/>
+        <line x1="15" y1="9" x2="15.01" y2="9"/>
+      </symbol>
+      <symbol id="icon-film" viewBox="0 0 24 24">
+        <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/>
+        <line x1="7" y1="2" x2="7" y2="22"/>
+        <line x1="17" y1="2" x2="17" y2="22"/>
+        <line x1="2" y1="12" x2="22" y2="12"/>
+        <line x1="2" y1="7" x2="7" y2="7"/>
+        <line x1="2" y1="17" x2="7" y2="17"/>
+        <line x1="17" y1="17" x2="22" y2="17"/>
+        <line x1="17" y1="7" x2="22" y2="7"/>
+      </symbol>
+      <symbol id="icon-palette" viewBox="0 0 24 24">
+        <circle cx="13.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+        <circle cx="17.5" cy="10.5" r="1" fill="currentColor" stroke="none"/>
+        <circle cx="8.5" cy="7.5" r="1" fill="currentColor" stroke="none"/>
+        <circle cx="6.5" cy="12.5" r="1" fill="currentColor" stroke="none"/>
+        <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>
+      </symbol>
+      <symbol id="icon-refresh" viewBox="0 0 24 24">
+        <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
+      </symbol>
+      <symbol id="icon-trash" viewBox="0 0 24 24">
+        <polyline points="3 6 5 6 21 6"/>
+        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+        <line x1="10" y1="11" x2="10" y2="17"/>
+        <line x1="14" y1="11" x2="14" y2="17"/>
+      </symbol>
+      <symbol id="icon-zoom-in" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="8"/>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        <line x1="11" y1="8" x2="11" y2="14"/>
+        <line x1="8" y1="11" x2="14" y2="11"/>
+      </symbol>
+      <symbol id="icon-message-square" viewBox="0 0 24 24">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+      </symbol>
+      <symbol id="icon-users" viewBox="0 0 24 24">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+        <circle cx="9" cy="7" r="4"/>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+      </symbol>
+      <symbol id="icon-pin" viewBox="0 0 24 24">
+        <line x1="12" y1="17" x2="12" y2="22"/>
+        <path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/>
+      </symbol>
+      <symbol id="icon-edit" viewBox="0 0 24 24">
+        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+      </symbol>
+      <symbol id="icon-eye-off" viewBox="0 0 24 24">
+        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+        <line x1="1" y1="1" x2="23" y2="23"/>
+      </symbol>
+      <symbol id="icon-volume-x" viewBox="0 0 24 24">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+        <line x1="23" y1="9" x2="17" y2="15"/>
+        <line x1="17" y1="9" x2="23" y2="15"/>
+      </symbol>
+      <symbol id="icon-volume-2" viewBox="0 0 24 24">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+      </symbol>
+      <symbol id="icon-ban" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10"/>
+        <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/>
+      </symbol>
+      <symbol id="icon-check-circle" viewBox="0 0 24 24">
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+        <polyline points="22 4 12 14.01 9 11.01"/>
+      </symbol>
+      <symbol id="icon-user" viewBox="0 0 24 24">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </symbol>
+      <symbol id="icon-camera" viewBox="0 0 24 24">
+        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+        <circle cx="12" cy="13" r="4"/>
+      </symbol>
+      <symbol id="icon-mail" viewBox="0 0 24 24">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+        <polyline points="22 6 12 13 2 6"/>
+      </symbol>
+      <symbol id="icon-shield" viewBox="0 0 24 24">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      </symbol>
+      <symbol id="icon-shuffle" viewBox="0 0 24 24">
+        <polyline points="16 3 21 3 21 8"></polyline>
+        <line x1="4" y1="20" x2="21" y2="3"></line>
+        <polyline points="21 16 21 21 16 21"></polyline>
+        <line x1="15" y1="15" x2="21" y2="21"></line>
+        <line x1="4" y1="4" x2="9" y2="9"></line>
+      </symbol>
+      <symbol id="icon-share" viewBox="0 0 24 24">
+        <circle cx="18" cy="5" r="3"></circle>
+        <circle cx="6" cy="12" r="3"></circle>
+        <circle cx="18" cy="19" r="3"></circle>
+        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+      </symbol>
+      <symbol id="icon-copy" viewBox="0 0 24 24">
+        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+      </symbol>
+      <symbol id="icon-link" viewBox="0 0 24 24">
+        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+      </symbol>
+      <symbol id="icon-qrcode" viewBox="0 0 24 24">
+        <rect x="3" y="3" width="7" height="7"></rect>
+        <rect x="14" y="3" width="7" height="7"></rect>
+        <rect x="14" y="14" width="7" height="7"></rect>
+        <rect x="3" y="14" width="7" height="7"></rect>
+      </symbol>
+      <symbol id="icon-menu" viewBox="0 0 24 24">
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </symbol>
+      <symbol id="icon-cpu" viewBox="0 0 24 24">
+        <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+        <rect x="9" y="9" width="6" height="6"></rect>
+        <line x1="9" y1="1" x2="9" y2="4"></line>
+        <line x1="15" y1="1" x2="15" y2="4"></line>
+        <line x1="9" y1="20" x2="9" y2="23"></line>
+        <line x1="15" y1="20" x2="15" y2="23"></line>
+        <line x1="20" y1="9" x2="23" y2="9"></line>
+        <line x1="20" y1="14" x2="23" y2="14"></line>
+        <line x1="1" y1="9" x2="4" y2="9"></line>
+        <line x1="1" y1="14" x2="4" y2="14"></line>
+      </symbol>
+      <symbol id="icon-sparkles" viewBox="0 0 24 24">
+        <path d="M12 3l1.912 4.888L18.8 9.8l-4.888 1.912L12 16.6l-1.912-4.888L5.2 9.8l4.888-1.912L12 3z"></path>
+        <path d="M19 16l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8.8-2.2z"></path>
+      </symbol>
+      <symbol id="icon-terminal" viewBox="0 0 24 24">
+        <polyline points="4 17 10 11 4 5"></polyline>
+        <line x1="12" y1="19" x2="20" y2="19"></line>
+      </symbol>
+      <symbol id="icon-zap" viewBox="0 0 24 24">
+        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+      </symbol>
+      <symbol id="icon-tool" viewBox="0 0 24 24">
+        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+      </symbol>
+      <symbol id="icon-home" viewBox="0 0 24 24">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+      </symbol>
+      <symbol id="icon-book-open" viewBox="0 0 24 24">
+        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+      </symbol>
+      <symbol id="icon-moon" viewBox="0 0 24 24">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </symbol>
+      <symbol id="icon-star" viewBox="0 0 24 24">
+        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- Fixed Top Header (Topbar + Rooms Navigation Bar) - Always Visible On Screen -->
+  <div class="sticky-top-header">
+    <!-- Top Navigation Bar -->
+    <nav class="topbar">
+      <div class="topbar-left">
+        <a href="/" class="board-nav-link">PESITM</a>
+        <span class="online-counter" id="online-count"><span class="online-pulse-dot"></span> 1 Online</span>
+      </div>
+
+      <div class="topbar-right">
+        {% if is_host %}
+        <!-- Host AI Co-Pilot Quick Access Button (Prominently Visible in Host Mode) -->
+        <button class="btn-top btn-host-ai-badge" id="btn-topbar-ai" onclick="openHostAiModal()" title="Open Qwen AI Co-Pilot &amp; Moderation Assistant">
+          <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-sparkles"></use></svg>
+          <span class="ai-badge-text">AI Mode</span>
+        </button>
+        {% endif %}
+
+        <!-- User's Assigned Real Animal Profile (Click to zoom like WhatsApp) -->
+        <div class="my-identity-badge" title="Your assigned anonymous profile (Click to view full photo)" onclick="showMyProfileModal()" style="cursor:pointer;">
+          <img id="my-animal-avatar" src="/api/animal/snow_leopard" alt="Animal DP">
+          <span id="my-animal-name">Connecting...</span>
+        </div>
+
+        <!-- My Groups Quick Button (Appears when user has joined groups) -->
+        <button class="btn-top btn-my-groups" id="btn-my-groups" onclick="openUserGroupsModal()" style="display:none;" title="View all your active private groups">
+          <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-users"></use></svg>
+          <span>Groups (<span id="user-groups-badge">0</span>)</span>
+        </button>
+
+        <!-- Hamburger Menu (3 lines) containing Streams, Find Someone, Groups, Feedback, Theme -->
+        <div class="hamburger-menu-wrapper" id="hamburger-menu-wrapper">
+          <button class="btn-top btn-hamburger" id="btn-hamburger" onclick="toggleHamburgerMenu(event)" aria-label="Open menu" title="Menu">
+            <svg class="ui-icon ui-icon-md" aria-hidden="true"><use href="#icon-menu"></use></svg>
+          </button>
+
+          <!-- Dropdown Menu -->
+          <div class="hamburger-dropdown" id="hamburger-dropdown" style="display:none;">
+            <!-- Streams & Departments -->
+            <div class="hamburger-section-label">Streams &amp; Departments</div>
+            <button class="hamburger-item" onclick="closeHamburgerMenu(); switchRoom('main');" title="Public Main Stream">
+              <span class="hamburger-item-icon" style="color:var(--text-main);">
+                <svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#icon-globe"></use></svg>
+              </span>
+              <span class="hamburger-item-text">Public Board</span>
+            </button>
+            <button class="hamburger-item" onclick="closeHamburgerMenu(); switchRoom('cse');" title="Computer Science &amp; Engineering Stream">
+              <span class="hamburger-item-icon" style="color:#60a5fa;">
+                <svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#icon-terminal"></use></svg>
+              </span>
+              <span class="hamburger-item-text">CSE Stream</span>
+            </button>
+            <button class="hamburger-item" onclick="closeHamburgerMenu(); switchRoom('ece');" title="Electronics &amp; Communication Stream">
+              <span class="hamburger-item-icon" style="color:#f59e0b;">
+                <svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#icon-zap"></use></svg>
+              </span>
+              <span class="hamburger-item-text">Electronics Stream</span>
+            </button>
+            <button class="hamburger-item" onclick="closeHamburgerMenu(); switchRoom('mech');" title="Mechanical Engineering Stream">
+              <span class="hamburger-item-icon" style="color:#94a3b8;">
+                <svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#icon-tool"></use></svg>
+              </span>
+              <span class="hamburger-item-text">Mechanical Stream</span>
+            </button>
+            <button class="hamburger-item" onclick="closeHamburgerMenu(); switchRoom('civil');" title="Civil Engineering Stream">
+              <span class="hamburger-item-icon" style="color:#f97316;">
+                <svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#icon-home"></use></svg>
+              </span>
+              <span class="hamburger-item-text">Civil Stream</span>
+            </button>
+            <button class="hamburger-item" onclick="closeHamburgerMenu(); switchRoom('faculty');" title="Faculty &amp; Staff Stream">
+              <span class="hamburger-item-icon" style="color:#a855f7;">
+                <svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#icon-book-open"></use></svg>
+              </span>
+              <span class="hamburger-item-text">Faculty</span>
+            </button>
+            <button class="hamburger-item" onclick="closeHamburgerMenu(); switchRoom('hostel');" title="Hostel &amp; Campus Life Stream">
+              <span class="hamburger-item-icon" style="color:#10b981;">
+                <svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#icon-moon"></use></svg>
+              </span>
+              <span class="hamburger-item-text">Hostel</span>
+            </button>
+
+            <div class="hamburger-divider"></div>
+
+            <!-- Features & Connect -->
+            <div class="hamburger-section-label">Features &amp; Groups</div>
+            <!-- 1. Find Someone -->
+            <button class="hamburger-item" onclick="closeHamburgerMenu(); findSomeoneToChat();" title="Match and chat with a random online user">
+              <span class="hamburger-item-icon" style="color:#c4b5fd;">
+                <svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#icon-shuffle"></use></svg>
+              </span>
+              <span class="hamburger-item-text">Find Someone</span>
+            </button>
+
+            <!-- 2. My Groups Modal Trigger -->
+            <button class="hamburger-item" id="menu-item-my-groups" onclick="closeHamburgerMenu(); openUserGroupsModal();" title="View your joined private groups">
+              <span class="hamburger-item-icon" style="color:#38bdf8;">
+                <svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#icon-users"></use></svg>
+              </span>
+              <span class="hamburger-item-text">My Groups (<span id="menu-groups-count">0</span>)</span>
+            </button>
+
+            <!-- 3. Share Link -->
+            <button class="hamburger-item" onclick="closeHamburgerMenu(); openShareModal();" title="Share website link with friends outside Wi-Fi or nearby">
+              <span class="hamburger-item-icon" style="color:#34d399;">
+                <svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#icon-share"></use></svg>
+              </span>
+              <span class="hamburger-item-text">Share Link</span>
+            </button>
+
+            <!-- 4. Anonymous Feedback Form -->
+            <button class="hamburger-item" onclick="closeHamburgerMenu(); openFeedbackModal();" title="Send anonymous suggestions &amp; feedback to admin">
+              <span class="hamburger-item-icon" style="color:#ec4899;">
+                <svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#icon-message-square"></use></svg>
+              </span>
+              <span class="hamburger-item-text">Feedback Form</span>
+            </button>
+
+            <div class="hamburger-divider"></div>
+
+            <!-- Color Theme Selector -->
+            <div class="hamburger-theme-row">
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span class="hamburger-item-icon" style="color:var(--text-date);">
+                  <svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#icon-palette"></use></svg>
+                </span>
+                <span style="font-size:13px; font-weight:500;">Theme</span>
+              </div>
+              <select id="theme-select" class="theme-selector" onchange="changeTheme(this.value)" aria-label="Select color theme">
+                <option value="mono-noir">B&amp;W Noir (Dark)</option>
+                <option value="mono-paper">B&amp;W Paper (Light)</option>
+                <option value="obsidian">Obsidian Minimal</option>
+                <option value="kyoto-tea">Kyoto Botanical</option>
+                <option value="tokyo-paper">Tokyo Atelier</option>
+                <option value="nordic-dusk">Nordic Dusk</option>
+                <option value="terracotta">Terracotta Warm</option>
+              </select>
+            </div>
+
+            <!-- Host Admin Options (Only for Host or Allowed IP) -->
+            {% if is_host %}
+            <div class="hamburger-divider"></div>
+            <div class="hamburger-section-label">Admin Controls</div>
+            <button class="hamburger-item" id="btn-host-ai-menu" style="color:#c084fc;" onclick="closeHamburgerMenu(); openHostAiModal();" title="Talk to Qwen AI Assistant">
+              <span class="hamburger-item-icon" style="color:#c084fc; background:rgba(168,85,247,0.15);">
+                <svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#icon-cpu"></use></svg>
+              </span>
+              <span class="hamburger-item-text">AI Mode (Qwen)</span>
+            </button>
+            <button class="hamburger-item" id="btn-host-modal" style="color:var(--host-banner-text);" onclick="closeHamburgerMenu(); openHostModal('devices');" title="Host Moderation Console">
+              <span class="hamburger-item-icon" style="color:var(--host-banner-text); background:rgba(243,194,82,0.12);">
+                <svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#icon-crown"></use></svg>
+              </span>
+              <span class="hamburger-item-text">Host Console</span>
+            </button>
+            <button class="hamburger-item" style="color:#ec4899;" onclick="closeHamburgerMenu(); openHostModal('feedbacks');" title="View User Feedbacks">
+              <span class="hamburger-item-icon" style="color:#ec4899; background:rgba(236,72,153,0.12);">
+                <svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#icon-message-square"></use></svg>
+              </span>
+              <span class="hamburger-item-text">Feedbacks</span>
+            </button>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Board Header (Minimal space & clean title) -->
+  <header class="board-header">
+    <h1 class="board-title" id="board-room-title">Pesitm Anonymous Board</h1>
+    <p class="board-subtitle" id="board-room-subtitle">100% Anonymous // No registration // Speak freely</p>
+  </header>
+
+  <!-- Main Feed Container (Chats flow chronologically, newest at bottom like WhatsApp) -->
+  <main class="main-wrapper">
+
+    <!-- Active Private Room Banner -->
+    <div id="private-room-banner" class="private-room-banner" style="display:none;">
+      <div class="private-room-meta">
+        <span class="private-room-lock-badge">
+          <svg class="ui-icon ui-icon-md" aria-hidden="true"><use href="#icon-lock"></use></svg>
+        </span>
+        <div>
+          <div class="private-room-title" id="private-room-title">Private Chat</div>
+          <div class="private-room-members" id="private-room-members">Members</div>
+        </div>
+      </div>
+      <div class="private-room-actions">
+        <button class="btn-room-action btn-add-user" onclick="openAddUserModal()" title="Invite another user to this group/private chat">
+          <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-user-plus"></use></svg>
+          <span>Add User</span>
+        </button>
+        <button class="btn-room-action btn-leave-room" onclick="leaveCurrentRoom()" title="Leave this group chat">
+          <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-log-out"></use></svg>
+          <span>Leave Group</span>
+        </button>
+        <button id="btn-admin-delete-room" class="btn-room-action btn-delete-room" style="display:none;" onclick="adminDeleteCurrentRoom()" title="Host Admin: Permanently delete this group">
+          <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-trash"></use></svg>
+          <span>Delete Group</span>
+        </button>
+        <button class="btn-room-action btn-exit-room" onclick="switchRoom('main')" title="Back to Public Board">
+          <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-arrow-left"></use></svg>
+          <span>Public Board</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Announcement Banner -->
+    <div class="announcement-wrapper">
+      <div id="announcement-banner" class="announcement-banner">
+        <svg class="ui-icon ui-icon-sm announcement-icon" aria-hidden="true"><use href="#icon-megaphone"></use></svg>
+        <strong id="announcement-text"></strong>
+        <button type="button" class="announcement-close-btn" onclick="this.parentElement.style.display='none'" aria-label="Dismiss announcement">
+          <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-x"></use></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Posts Feed: Full Screen Responsive Stream -->
+    <div class="posts-stream-container">
+      <div id="posts-stream" class="posts-stream">
+        <!-- Populated dynamically by chat.js -->
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Sticky Bottom Typing Message Box (WhatsApp Style) -->
+  <footer class="bottom-compose-bar">
+    <div class="bottom-compose-inner">
+      <!-- Reply Preview Bar (WhatsApp Style) -->
+      <div id="reply-preview-bar" class="reply-preview-bar" style="display:none;">
+        <div class="reply-preview-line"></div>
+        <div class="reply-preview-body">
+          <div class="reply-preview-header">
+            <span class="reply-preview-icon">
+              <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-reply"></use></svg>
+            </span>
+            <span class="reply-preview-target">Replying to <strong id="reply-preview-name"></strong></span>
+          </div>
+          <div id="reply-preview-snippet" class="reply-preview-snippet"></div>
+        </div>
+        <button class="reply-preview-cancel" onclick="cancelReply()" title="Cancel reply" aria-label="Cancel reply">
+          <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-x"></use></svg>
+        </button>
+      </div>
+
+      <!-- Image Attachment Preview Chip -->
+      <div id="preview-chip" class="attached-preview-bottom">
+        <img id="preview-thumb-img" src="" alt="Thumbnail">
+        <span id="preview-filename">image.jpg</span>
+        <button type="button" class="btn-remove-attachment" onclick="removePendingImage()" title="Remove image" aria-label="Remove image">
+          <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-x"></use></svg>
+        </button>
+      </div>
+
+      <!-- Stickers & GIFs Tray Popup (WhatsApp / Telegram style) -->
+      <div id="stickers-tray" class="stickers-tray" style="display: none;">
+        <div class="stickers-tray-header">
+          <div class="stickers-tray-tabs">
+            <button type="button" id="tab-btn-stickers" class="sticker-tab-btn active" onclick="switchStickerTab('stickers')">
+              <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-smile"></use></svg>
+              <span>Stickers</span>
+            </button>
+            <button type="button" id="tab-btn-gifs" class="sticker-tab-btn" onclick="switchStickerTab('gifs')">
+              <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-film"></use></svg>
+              <span>GIFs</span>
+            </button>
+          </div>
+          <div class="stickers-tray-actions">
+            <input type="text" id="sticker-search-input" class="sticker-search-input" placeholder="Search..." oninput="filterStickersTray(this.value)">
+            <button type="button" class="sticker-tray-close" onclick="closeStickersTray()" title="Close tray" aria-label="Close tray">
+              <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-x"></use></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Stickers View -->
+        <div id="stickers-view" class="stickers-view-panel">
+          <div class="sticker-cat-chips">
+            <button type="button" class="sticker-cat-chip active" onclick="filterStickerCategory('all', this)">All</button>
+            <button type="button" class="sticker-cat-chip" onclick="filterStickerCategory('Reactions', this)">Reactions</button>
+            <button type="button" class="sticker-cat-chip" onclick="filterStickerCategory('Campus', this)">Campus</button>
+            <button type="button" class="sticker-cat-chip" onclick="filterStickerCategory('Mascots', this)">Mascots</button>
+          </div>
+          <div id="stickers-grid" class="stickers-grid">
+            <!-- Rendered by chat.js -->
+          </div>
+        </div>
+
+        <!-- GIFs View -->
+        <div id="gifs-view" class="stickers-view-panel" style="display: none;">
+          <div class="gif-custom-bar">
+            <input type="url" id="custom-gif-input" class="gif-custom-input" placeholder="Paste GIF URL (Tenor, Giphy, Web)..." onkeydown="if(event.key==='Enter'){event.preventDefault();sendCustomGifUrl();}">
+            <button type="button" class="btn-gif-send" onclick="sendCustomGifUrl()">Send</button>
+          </div>
+          <div id="gifs-grid" class="gifs-grid">
+            <!-- Rendered by chat.js -->
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-compose-row">
+        <label class="btn-bottom-attach" title="Attach Image / GIF" aria-label="Attach Image / GIF">
+          <svg class="ui-icon ui-icon-md" aria-hidden="true"><use href="#icon-paperclip"></use></svg>
+          <input type="file" id="file-input" accept="image/jpeg,image/png,image/gif,image/webp" style="display:none;">
+        </label>
+
+        <button type="button" id="btn-stickers-toggle" class="btn-bottom-attach" onclick="toggleStickersTray()" title="Stickers & GIFs" aria-label="Stickers & GIFs">
+          <svg class="ui-icon ui-icon-md" aria-hidden="true"><use href="#icon-smile"></use></svg>
+        </button>
+
+        <textarea id="chat-textarea" class="bottom-compose-textarea" placeholder="" rows="1"></textarea>
+
+        <button class="btn-bottom-send" onclick="sendMessage()" title="Send">
+          <svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#icon-send"></use></svg>
+          <span>Post</span>
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Host Console Modal (Only for Host Laptop) -->
+  {% if is_host %}
+  <div id="modal-host" class="modal-overlay" onclick="if(event.target === this) closeModals()">
+    <div class="modal-content" style="max-width: 800px;">
+      <div class="modal-header">
+        <span style="display:inline-flex; align-items:center; gap:8px;">
+          <svg class="ui-icon ui-icon-sm" aria-hidden="true" style="color:var(--host-banner-text);"><use href="#icon-crown"></use></svg>
+          Host Moderation Console
+        </span>
+        <button class="modal-close-btn" onclick="closeModals()" aria-label="Close modal">
+          <svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#icon-x"></use></svg>
+        </button>
+      </div>
+
+      <!-- Broadcast Announcement Input -->
+      <div style="background:var(--bg-form); border:1px solid var(--border-post); padding:8px 12px; border-radius:4px; margin-bottom:12px; display:flex; align-items:center; gap:8px;">
+        <svg class="ui-icon ui-icon-sm" aria-hidden="true" style="color:var(--text-date);"><use href="#icon-megaphone"></use></svg>
+        <input type="text" id="announce-input" class="compose-textarea" style="height:32px; margin-bottom:0; flex:1;" placeholder="Broadcast an announcement to all connected devices...">
+        <button class="btn-top" style="height:32px; background:var(--btn-submit); color:var(--btn-submit-text, #fff);" onclick="hostBroadcastAnnouncement()">
+          <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-send"></use></svg>
+          Broadcast
+        </button>
+      </div>
+
+      <!-- Console Navigation Tabs: Devices vs Groups vs AI vs Feedbacks -->
+      <div class="console-tabs">
+        <button id="tab-host-devices" class="console-tab-btn active" onclick="switchHostTab('devices')">
+          <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-user"></use></svg>
+          Devices (<span id="host-device-count">0</span>)
+        </button>
+        <button id="tab-host-groups" class="console-tab-btn" onclick="switchHostTab('groups')">
+          <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-users"></use></svg>
+          Groups (<span id="host-group-count">0</span>)
+        </button>
+        <button id="tab-host-ai" class="console-tab-btn" onclick="switchHostTab('ai')">
+          <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-cpu"></use></svg>
+          AI Co-Pilot (Qwen)
+        </button>
+        <button id="tab-host-ailogs" class="console-tab-btn" onclick="switchHostTab('ailogs')">
+          <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-shield"></use></svg>
+          AI Logs (<span id="host-ailog-count">0</span>)
+        </button>
+        <button id="tab-host-feedbacks" class="console-tab-btn" onclick="switchHostTab('feedbacks')">
+          <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-message-square"></use></svg>
+          Feedbacks (<span id="host-feedback-count">0</span>)
+        </button>
+      </div>
+
+      <!-- Pane 1: Devices Table -->
+      <div id="host-pane-devices">
+        <p style="font-size: 12px; color: var(--text-date); margin-bottom: 10px;">
+          Only visible on this host laptop. Moderate any device in real-time:
+        </p>
+
+        <div style="overflow-x: auto;">
+          <table class="console-table">
+            <thead>
+              <tr>
+                <th>IP / Hostname</th>
+                <th>Real Name (Host Only)</th>
+                <th>Device & MAC</th>
+                <th>Posts</th>
+                <th>Status</th>
+                <th>Moderation Actions</th>
+              </tr>
+            </thead>
+            <tbody id="host-table-tbody">
+              <!-- Populated dynamically -->
+            </tbody>
+          </table>
+        </div>
+
+        <div style="margin-top: 16px; display: flex; justify-content: space-between; align-items: center;">
+          <button class="btn-top" onclick="openHostModal()">
+            <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-refresh"></use></svg>
+            Refresh Devices
+          </button>
+          <button class="btn-top" style="color: #ef4444;" onclick="hostClearAll()">
+            <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-trash"></use></svg>
+            Clear All Messages
+          </button>
+        </div>
+      </div>
+
+      <!-- Pane 2: Active Groups Table (Delete Any Created Group) -->
+      <div id="host-pane-groups" style="display:none;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; gap:10px; flex-wrap:wrap;">
+          <p style="font-size: 12px; color: var(--text-date); margin: 0;">
+            As host admin, inspect, monitor, or permanently delete any created group / private room:
+          </p>
+          <input type="text" id="host-groups-search-input" class="compose-textarea" placeholder="Filter groups by name or ID..." style="height:30px; width:220px; font-size:12px; margin-bottom:0;" oninput="filterHostGroups(this.value)">
+        </div>
+
+        <div style="overflow-x: auto;">
+          <table class="console-table">
+            <thead>
+              <tr>
+                <th>Group Name</th>
+                <th>Room ID</th>
+                <th>Members</th>
+                <th>Posts</th>
+                <th>Admin Actions</th>
+              </tr>
+            </thead>
+            <tbody id="host-groups-tbody">
+              <!-- Populated dynamically -->
+            </tbody>
+          </table>
+        </div>
+
+        <div style="margin-top: 16px; display: flex; justify-content: space-between; align-items: center;">
+          <button class="btn-top" onclick="loadHostGroups()">
+            <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-refresh"></use></svg>
+            Refresh Groups
+          </button>
+        </div>
+      </div>
+
+      <!-- Pane 3: Qwen AI Admin Co-Pilot -->
+      <div id="host-pane-ai" style="display:none;">
+        <!-- Real-Time AI Auto-Moderator Controls Card -->
+        <div class="ai-automod-banner" style="background:var(--bg-form, rgba(255,255,255,0.04)); border:1px solid var(--border-post, rgba(255,255,255,0.1)); border-radius:6px; padding:10px 12px; margin-bottom:10px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="font-size:12.5px; font-weight:700; display:flex; align-items:center; gap:6px;">
+                <svg class="ui-icon ui-icon-xs" style="color:#ef4444;" aria-hidden="true"><use href="#icon-shield"></use></svg>
+                <span>Real-Time AI Auto-Mod</span>
+              </span>
+              <label style="display:inline-flex; align-items:center; gap:6px; cursor:pointer;" title="Toggle autonomous real-time live message moderation">
+                <input type="checkbox" id="ai-automod-toggle" checked onchange="toggleAiAutomod(this.checked)">
+                <span id="ai-automod-status-badge" style="font-size:10.5px; padding:2px 8px; background:#22c55e; color:#fff; border-radius:10px; font-weight:700;">ACTIVE</span>
+              </label>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <select id="ai-automod-mode-select" class="theme-selector" style="font-size:11px; padding:2px 6px; height:26px;" onchange="updateAiAutomodMode(this.value)" title="Action taken when violating content is detected in real time">
+                <option value="delete_and_ban">Delete Post &amp; Ban Author</option>
+                <option value="delete_only">Delete Post Only</option>
+              </select>
+              <button class="btn-top" style="font-size:11px; padding:3px 8px; background:rgba(239, 68, 68, 0.12); color:#ef4444; border:1px solid rgba(239,68,68,0.3);" onclick="switchHostTab('ailogs')" title="View audit log of deleted posts and banned authors">
+                <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-shield"></use></svg>
+                <span>Audit Logs (<span id="ai-mod-count">0</span>)</span>
+              </button>
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-top:8px; font-size:11px; color:var(--text-date); flex-wrap:wrap; gap:6px;">
+            <label style="display:inline-flex; align-items:center; gap:5px; cursor:pointer;" title="Purge all previous messages from the banned author">
+              <input type="checkbox" id="ai-automod-purge-cb" checked onchange="updateAiAutomodPurge(this.checked)">
+              <span>Purge all author's previous messages on ban</span>
+            </label>
+            <span style="display:inline-flex; align-items:center; gap:4px;">
+              <span>Fast AI Model:</span>
+              <select id="ai-automod-model-select" class="theme-selector" style="font-size:10.5px; padding:1px 5px; height:22px;" onchange="updateAiAutomodModel(this.value)" title="Local model used for sub-second real-time evaluation">
+                <option value="qwen2.5:0.5b">qwen2.5:0.5b (0.3s)</option>
+                <option value="qwen2.5:1.5b">qwen2.5:1.5b</option>
+              </select>
+            </span>
+          </div>
+        </div>
+
+        <div class="ai-console-header">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span class="ai-status-indicator" id="ai-status-indicator">
+              <span class="online-pulse-dot" id="ai-pulse-dot" style="background:#f59e0b;"></span>
+              <span id="ai-status-text" style="font-weight:600; font-size:12.5px;">Checking Ollama...</span>
+            </span>
+            <select id="ai-model-select" class="theme-selector" style="font-size:11px; padding:2px 8px; height:26px;" onchange="updateSelectedAiModel(this.value)">
+              <option value="qwen2.5:1.5b">qwen2.5:1.5b (Fast)</option>
+              <option value="qwen2.5:3b">qwen2.5:3b</option>
+              <option value="qwen2.5:0.5b">qwen2.5:0.5b</option>
+            </select>
+          </div>
+
+          <div style="display:flex; align-items:center; gap:8px;">
+            <label style="font-size:11.5px; color:var(--text-date); display:inline-flex; align-items:center; gap:5px; cursor:pointer;" title="Inject recent live chat messages into Qwen's context">
+              <input type="checkbox" id="ai-include-context-cb" checked>
+              <span>Live Chat Context</span>
+            </label>
+            <button class="btn-top" style="font-size:11px; padding:3px 7px;" onclick="checkAiBackendStatus()" title="Refresh Ollama connection">
+              <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-refresh"></use></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Quick AI Action Chips -->
+        <div class="ai-quick-actions">
+          <button class="ai-quick-chip" onclick="scanAndAutoClean()" title="Audit recent messages and immediately delete violating posts and ban authors in real time">
+            <svg class="ui-icon ui-icon-xs" style="color:#ef4444;" aria-hidden="true"><use href="#icon-shield"></use></svg>
+            <span style="color:#ef4444; font-weight:700;">⚡ Scan &amp; Auto-Clean</span>
+          </button>
+          <button class="ai-quick-chip" onclick="sendAiQuickAction('summarize')">
+            <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-sparkles"></use></svg>
+            <span>Summarize Chat</span>
+          </button>
+          <button class="ai-quick-chip" onclick="sendAiQuickAction('audit')">
+            <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-shield"></use></svg>
+            <span>Audit Only</span>
+          </button>
+          <button class="ai-quick-chip" onclick="sendAiQuickAction('announcement')">
+            <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-megaphone"></use></svg>
+            <span>Draft Announcement</span>
+          </button>
+          <button class="ai-quick-chip" onclick="clearAiChat()" title="Clear conversation history">
+            <span>Clear History</span>
+          </button>
+        </div>
+
+        <!-- AI Chat Messages Feed -->
+        <div id="ai-chat-messages" class="ai-chat-box">
+          <div class="ai-msg-bubble ai-msg-bot">
+            <div class="ai-msg-meta">
+              <strong>Qwen AI Co-Pilot</strong>
+              <span class="ai-msg-time">Ready</span>
+            </div>
+            <div class="ai-msg-content">
+              Hello Admin! I am connected to your local <strong>Qwen</strong> model via Ollama.<br><br>
+              I have real-time visibility into the chat feed and can help you audit messages, identify toxic behavior, summarize activity, and draft broadcasts. Ask me anything below!
+            </div>
+          </div>
+        </div>
+
+        <!-- AI Chat Prompt Input Row -->
+        <form id="ai-chat-form" onsubmit="submitAiChat(event)" class="ai-chat-input-bar">
+          <input type="text" id="ai-chat-input" class="compose-textarea" placeholder="Ask Qwen about chat activity, users, or moderation advice..." style="margin-bottom:0; height:38px; flex:1;" autocomplete="off" required>
+          <button type="submit" id="btn-ai-send" class="btn-top" style="height:38px; padding:0 14px; background:var(--btn-submit); color:var(--btn-submit-text, #fff); border-radius:6px;">
+            <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-send"></use></svg>
+            <span>Send</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Pane 4: Feedbacks Table -->
+      <div id="host-pane-feedbacks" style="display:none;">
+        <p style="font-size: 12px; color: var(--text-date); margin-bottom: 10px;">
+          Anonymous suggestions, issue reports, and feedback submitted by campus users:
+        </p>
+
+        <div style="overflow-x: auto;">
+          <table class="console-table">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Category</th>
+                <th>Rating</th>
+                <th>Message</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="host-feedbacks-tbody">
+              <!-- Populated dynamically -->
+            </tbody>
+          </table>
+        </div>
+
+        <div style="margin-top: 16px; display: flex; justify-content: space-between; align-items: center;">
+          <button class="btn-top" onclick="loadHostFeedbacks()">
+            <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-refresh"></use></svg>
+            Refresh Feedbacks
+          </button>
+        </div>
+      </div>
+
+      <!-- Pane 5: Real-Time AI Moderation Audit Logs -->
+      <div id="host-pane-ailogs" style="display:none;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; gap:10px; flex-wrap:wrap;">
+          <p style="font-size: 12px; color: var(--text-date); margin: 0;">
+            Live audit trail of real-time actions taken by the AI Auto-Moderator:
+          </p>
+          <button class="btn-top" style="font-size:11px; padding:3px 8px;" onclick="loadHostAiLogs()">
+            <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-refresh"></use></svg>
+            Refresh Logs
+          </button>
+        </div>
+
+        <div style="overflow-x: auto;">
+          <table class="console-table">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Post #</th>
+                <th>Author</th>
+                <th>IP Address</th>
+                <th>Action Taken</th>
+                <th>Reason</th>
+              </tr>
+            </thead>
+            <tbody id="host-ailogs-tbody">
+              <!-- Populated dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- My Groups Modal (Efficiently view, search and switch multiple groups without clutter) -->
+  <div id="modal-user-groups" class="modal-overlay" onclick="if(event.target === this) closeModals()">
+    <div class="modal-content" style="max-width: 500px;">
+      <div class="modal-header">
+        <span style="display:inline-flex; align-items:center; gap:8px;">
+          <svg class="ui-icon ui-icon-sm" aria-hidden="true" style="color:var(--btn-submit);"><use href="#icon-users"></use></svg>
+          My Private Groups
+        </span>
+        <button class="modal-close-btn" onclick="closeModals()" aria-label="Close modal">
+          <svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#icon-x"></use></svg>
+        </button>
+      </div>
+
+      <!-- Search input for multiple groups -->
+      <div style="margin-bottom: 12px;">
+        <input type="text" id="user-groups-search" class="compose-textarea" placeholder="Search your groups by name or member..." style="height:36px; margin-bottom:0;" oninput="filterUserGroups(this.value)">
+      </div>
+
+      <div id="user-groups-list" class="user-groups-list" style="max-height: 380px; overflow-y: auto; display:flex; flex-direction:column; gap:8px;">
+        <!-- Populated dynamically -->
+      </div>
+
+      <div style="margin-top: 14px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-post); padding-top: 10px;">
+        <button class="btn-top" onclick="closeModals(); findSomeoneToChat();" style="font-size:12px;">
+          <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-shuffle"></use></svg>
+          Find Someone
+        </button>
+        <button class="btn-top" onclick="closeModals(); switchRoom('main');" style="font-size:12px;">
+          <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-globe"></use></svg>
+          Back to Public Board
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- WhatsApp-Style User Profile & DP Zoom Modal -->
+  <div id="modal-profile" class="modal-overlay" onclick="if(event.target === this) closeModals()">
+    <div class="profile-modal-card">
+      <button class="modal-close-btn" style="position:absolute; top:12px; right:14px;" onclick="closeModals()" aria-label="Close modal">
+        <svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#icon-x"></use></svg>
+      </button>
+
+      <div class="profile-modal-avatar-box" onclick="toggleProfileZoom()" title="Click image to zoom in/out">
+        <img id="profile-modal-img" src="" alt="Profile DP" class="profile-modal-img">
+        <span class="profile-zoom-badge">
+          <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-zoom-in"></use></svg>
+          Click to zoom
+        </span>
+      </div>
+
+      <div class="profile-modal-details">
+        <h3 id="profile-modal-name" class="profile-modal-name">Animal Name</h3>
+        <p id="profile-modal-sci" class="profile-modal-sci">Scientific Name</p>
+        <div id="profile-modal-status" class="profile-modal-status">
+          <span class="online-pulse-dot"></span> Online
+        </div>
+        <div id="profile-modal-host-intel" class="profile-modal-host-intel" style="display:none;"></div>
+      </div>
+
+      <div id="profile-modal-actions" class="profile-modal-actions">
+        <!-- Populated dynamically: [Start Private Chat] etc. -->
+      </div>
+    </div>
+  </div>
+
+  <!-- WhatsApp-Style Incoming Private/Group Chat Invite Modal -->
+  <div id="modal-invite" class="modal-overlay">
+    <div class="invite-modal-card">
+      <div class="invite-header">
+        <span id="invite-icon" class="invite-header-icon">
+          <svg class="ui-icon ui-icon-md" aria-hidden="true"><use href="#icon-message-square"></use></svg>
+        </span>
+        <strong id="invite-header-title">Private Chat Request</strong>
+      </div>
+      <div class="invite-body">
+        <img id="invite-avatar" src="" alt="Avatar" class="invite-avatar">
+        <div class="invite-info">
+          <h4 id="invite-name">Animal Name</h4>
+          <p id="invite-text">wants to start a 1-on-1 private chat with you.</p>
+        </div>
+      </div>
+      <div class="invite-actions">
+        <button class="btn-invite-decline" onclick="respondPrivateChat(false)">Decline</button>
+        <button class="btn-invite-accept" id="btn-invite-accept" onclick="respondPrivateChat(true)">Accept & Chat</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add User to Room Modal (Available in private/group chats) -->
+  <div id="modal-add-user" class="modal-overlay" onclick="if(event.target === this) closeModals()">
+    <div class="modal-content" style="max-width: 480px;">
+      <div class="modal-header">
+        <span style="display:inline-flex; align-items:center; gap:8px;">
+          <svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#icon-users"></use></svg>
+          Invite User to Group Chat
+        </span>
+        <button class="modal-close-btn" onclick="closeModals()" aria-label="Close modal">
+          <svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#icon-x"></use></svg>
+        </button>
+      </div>
+      <p style="font-size: 12.5px; color: var(--text-date); margin-bottom: 12px;">
+        Select an active online peer to send an invite request (they will join once they accept):
+      </p>
+      <div id="online-users-list" class="online-users-list">
+        <div style="text-align:center; padding: 20px; color: var(--text-date);">Loading active users...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Broadcast Pop-up Notification Modal (Appears to All Users) -->
+  <div id="modal-broadcast-popup" class="modal-overlay" onclick="if(event.target === this) closeBroadcastModal()">
+    <div class="broadcast-modal-card">
+      <button class="modal-close-btn" style="position:absolute; top:14px; right:14px;" onclick="closeBroadcastModal()" aria-label="Close notification">
+        <svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#icon-x"></use></svg>
+      </button>
+
+      <div class="broadcast-badge-wrap">
+        <div class="broadcast-badge-icon">
+          <svg class="ui-icon ui-icon-lg" aria-hidden="true"><use href="#icon-megaphone"></use></svg>
+        </div>
+      </div>
+
+      <div class="broadcast-modal-header">
+        <div class="broadcast-admin-tag">
+          <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-crown"></use></svg>
+          <span>Admin Broadcast</span>
+        </div>
+        <h3 class="broadcast-modal-title">Important Announcement</h3>
+        <p id="broadcast-popup-time" class="broadcast-modal-meta">Received just now</p>
+      </div>
+
+      <div class="broadcast-modal-body">
+        <div id="broadcast-popup-message" class="broadcast-message-box"></div>
+      </div>
+
+      <div class="broadcast-modal-actions">
+        <button class="btn-broadcast-ack" onclick="closeBroadcastModal()">
+          <svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#icon-check-circle"></use></svg>
+          <span>Understood / Dismiss</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Share & Invite Modal (Worldwide & Local Wi-Fi) -->
+  <div id="modal-share" class="modal-overlay" onclick="if(event.target === this) closeModals()">
+    <div class="modal-content" style="max-width: 520px;">
+      <div class="modal-header">
+        <span style="display:inline-flex; align-items:center; gap:8px;">
+          <svg class="ui-icon ui-icon-sm" aria-hidden="true" style="color:var(--btn-submit);"><use href="#icon-share"></use></svg>
+          Share Website Link
+        </span>
+        <button class="modal-close-btn" onclick="closeModals()" aria-label="Close modal">
+          <svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#icon-x"></use></svg>
+        </button>
+      </div>
+
+      <div style="padding: 6px 0 16px;">
+        <!-- Worldwide Public Link Box -->
+        <div class="share-card-section" style="background:var(--bg-form); border:1px solid var(--border-post); border-radius:6px; padding:14px; margin-bottom:14px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px;">
+            <strong style="display:inline-flex; align-items:center; gap:6px; font-size:13.5px; color:#38bdf8;">
+              <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-globe"></use></svg>
+              Worldwide Public Link (Outside Wi-Fi)
+            </strong>
+            <span class="share-badge-live" id="share-badge-status" style="background:rgba(52,211,153,0.15); color:#34d399; font-size:11px; padding:2px 8px; border-radius:12px; font-weight:600;">Active 24/7</span>
+          </div>
+          <p style="font-size:12px; color:var(--text-date); margin:0 0 10px; line-height:1.4;">
+            Anyone with this link can open the chat from anywhere in the world on 4G/5G mobile data, remote Wi-Fi, or hotspot!
+          </p>
+          <div style="display:flex; gap:8px; align-items:center;">
+            <input type="text" id="share-public-url-input" class="compose-textarea" readonly style="margin-bottom:0; height:36px; font-family:monospace; font-size:12px; flex:1; background:var(--input-bg); border-color:var(--input-border);" value="{{ public_url or '' }}">
+            <button class="btn-top" style="height:36px; padding:0 14px; background:var(--btn-submit); color:var(--btn-submit-text, #fff);" onclick="copyShareUrl('share-public-url-input')">
+              <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-copy"></use></svg>
+              Copy
+            </button>
+          </div>
+        </div>
+
+        <!-- Local Wi-Fi Link Box (Host Only - Never Exposed to Visitors) -->
+        {% if is_host and lan_ip %}
+        <div class="share-card-section" style="background:var(--bg-form); border:1px solid var(--border-post); border-radius:6px; padding:14px; margin-bottom:14px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px;">
+            <strong style="display:inline-flex; align-items:center; gap:6px; font-size:13.5px; color:var(--text-main);">
+              <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-link"></use></svg>
+              Host Only: Local Wi-Fi Link
+            </strong>
+          </div>
+          <p style="font-size:12px; color:var(--text-date); margin:0 0 10px; line-height:1.4;">
+            Visible only to you as the host.
+          </p>
+          <div style="display:flex; gap:8px; align-items:center;">
+            <input type="text" id="share-lan-url-input" class="compose-textarea" readonly style="margin-bottom:0; height:36px; font-family:monospace; font-size:12px; flex:1; background:var(--input-bg); border-color:var(--input-border);" value="http://{{ lan_ip }}:{{ port }}/">
+            <button class="btn-top" style="height:36px; padding:0 14px;" onclick="copyShareUrl('share-lan-url-input')">
+              <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-copy"></use></svg>
+              Copy
+            </button>
+          </div>
+        </div>
+        {% endif %}
+
+
+        <!-- QR Code Box -->
+        <div style="display:flex; align-items:center; gap:16px; background:var(--bg-form); border:1px solid var(--border-post); border-radius:6px; padding:14px; margin-bottom:14px;">
+          <div style="background:#fff; padding:6px; border-radius:6px; display:inline-flex; flex-shrink:0;">
+            <img id="share-qr-img" src="/api/qrcode" alt="QR Code" style="width:100px; height:100px; display:block;">
+          </div>
+          <div>
+            <strong style="font-size:13px; color:var(--text-main); display:block; margin-bottom:4px;">
+              Scan QR Code to Join
+            </strong>
+            <p style="font-size:12px; color:var(--text-date); margin:0 0 10px; line-height:1.4;">
+              Friends can point their smartphone camera at this QR code to immediately open the chat.
+            </p>
+            <button class="btn-top" style="font-size:12px; padding:4px 10px;" onclick="downloadQrCode()">
+              Save QR Image
+            </button>
+          </div>
+        </div>
+
+        <!-- Share Actions -->
+        <div style="display:flex; gap:10px; justify-content:flex-end;">
+          <button class="btn-top" id="btn-native-share" style="background:#25d366; color:#fff; border-color:#25d366;" onclick="nativeShareLink()">
+            <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-share"></use></svg>
+            Share via Apps
+          </button>
+          <button class="btn-top" onclick="closeModals()">Done</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Anonymous Feedback Modal -->
+  <div id="modal-feedback" class="modal-overlay" onclick="if(event.target === this) closeModals()">
+    <div class="modal-content" style="max-width: 480px;">
+      <div class="modal-header">
+        <span style="display:inline-flex; align-items:center; gap:8px;">
+          <svg class="ui-icon ui-icon-sm" aria-hidden="true" style="color:#ec4899;"><use href="#icon-message-square"></use></svg>
+          Anonymous Feedback Form
+        </span>
+        <button class="modal-close-btn" onclick="closeModals()" aria-label="Close modal">
+          <svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#icon-x"></use></svg>
+        </button>
+      </div>
+
+      <p style="font-size: 12.5px; color: var(--text-date); margin-bottom: 14px; line-height: 1.4;">
+        Submit anonymous suggestions, branch/stream ideas, or bug reports to the admin. 100% anonymous &mdash; no login or identity required.
+      </p>
+
+      <form onsubmit="submitAnonymousFeedback(event)" style="display:flex; flex-direction:column; gap:12px;">
+        <div>
+          <label style="font-size:12px; font-weight:600; display:block; margin-bottom:4px; color:var(--text-main);">Category</label>
+          <select id="feedback-category" class="theme-selector" style="width:100%; height:36px; padding:6px 10px; font-size:13px;">
+            <option value="General Suggestion">💡 General Suggestion</option>
+            <option value="Feature Request">🚀 Feature Request</option>
+            <option value="Stream / Department Issue">🏛️ Stream / Department Issue</option>
+            <option value="Bug Report">🐛 Bug Report / Technical Glitch</option>
+            <option value="Appreciation">❤️ Appreciation / Compliment</option>
+          </select>
+        </div>
+
+        <div>
+          <label style="font-size:12px; font-weight:600; display:block; margin-bottom:4px; color:var(--text-main);">Experience Rating</label>
+          <div class="feedback-star-rating" id="feedback-star-rating">
+            <span class="star-btn active" data-rating="1" onclick="setFeedbackRating(1)">★</span>
+            <span class="star-btn active" data-rating="2" onclick="setFeedbackRating(2)">★</span>
+            <span class="star-btn active" data-rating="3" onclick="setFeedbackRating(3)">★</span>
+            <span class="star-btn active" data-rating="4" onclick="setFeedbackRating(4)">★</span>
+            <span class="star-btn active" data-rating="5" onclick="setFeedbackRating(5)">★</span>
+            <span id="feedback-rating-label" style="font-size:12px; color:var(--text-date); margin-left:8px;">5 / 5 Stars</span>
+          </div>
+          <input type="hidden" id="feedback-rating-val" value="5">
+        </div>
+
+        <div>
+          <label style="font-size:12px; font-weight:600; display:block; margin-bottom:4px; color:var(--text-main);">Your Feedback</label>
+          <textarea id="feedback-message" class="compose-textarea" placeholder="Write your anonymous suggestions, opinions, or bug details here..." style="height:110px; resize:vertical; font-size:13px; margin-bottom:0;" required></textarea>
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:6px;">
+          <button type="button" class="btn-top" onclick="closeModals()">Cancel</button>
+          <button type="submit" id="btn-submit-feedback" class="btn-top" style="background:var(--btn-submit); color:var(--btn-submit-text, #fff); font-weight:600; padding:0 16px;">
+            <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-send"></use></svg>
+            Submit Anonymously
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notifications Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <script src="/static/js/chat.js?v={{ cache_v }}"></script>
+</body>
+</html>

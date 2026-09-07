@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <defs>
+    <linearGradient id="hrtGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ec4899"/>
+      <stop offset="50%" stop-color="#ef4444"/>
+      <stop offset="100%" stop-color="#be185d"/>
+    </linearGradient>
+    <filter id="hrtGlow">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#f43f5e" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+  <path d="M60 102 C30 75 12 55 12 36 C12 20 25 12 40 12 C50 12 57 17 60 23 C63 17 70 12 80 12 C95 12 108 20 108 36 C108 55 90 75 60 102 Z" fill="url(#hrtGrad)" filter="url(#hrtGlow)"/>
+  <!-- Sparkles -->
+  <path d="M35 24 C38 32 30 38 28 40 C34 38 42 42 40 34 C42 30 36 24 35 24 Z" fill="#ffffff" opacity="0.7"/>
+  <circle cx="84" cy="28" r="3" fill="#ffffff" opacity="0.8"/>
+  <circle cx="92" cy="42" r="2" fill="#ffffff" opacity="0.6"/>
+</svg>

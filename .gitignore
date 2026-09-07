@@ -1,0 +1,36 @@
+# Database & local secrets
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+.admin_token
+.ngrok_domain
+.tunnel_token
+.tunnel_domain
+.tunnel.pid
+.tunnel_url
+tunnel.log
+
+# User Uploads (preserve folder structure with .gitkeep)
+uploads/*
+!uploads/.gitkeep
+!uploads/thumbs/
+uploads/thumbs/*
+!uploads/thumbs/.gitkeep
+
+# Python cache & virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.env
+.venv/
+venv/
+env/
+
+# System & Editor configs
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*.swo

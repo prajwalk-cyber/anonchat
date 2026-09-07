@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <defs>
+    <radialGradient id="capyBg" cx="40%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#a16207"/>
+      <stop offset="100%" stop-color="#713f12"/>
+    </radialGradient>
+  </defs>
+  <!-- Orange on head (mandarin) -->
+  <circle cx="60" cy="22" r="10" fill="#f97316" stroke="#c2410c" stroke-width="1.5"/>
+  <path d="M60 12 C62 8 68 8 66 12 Z" fill="#16a34a"/>
+  <!-- Capybara Head -->
+  <rect x="35" y="32" width="50" height="56" rx="18" fill="url(#capyBg)" stroke="#451a03" stroke-width="3"/>
+  <!-- Snout blocky -->
+  <rect x="45" y="58" width="30" height="28" rx="8" fill="#854d0e"/>
+  <!-- Closed zen chill eyes -->
+  <line x1="42" y1="48" x2="52" y2="48" stroke="#1c1917" stroke-width="3" stroke-linecap="round"/>
+  <line x1="68" y1="48" x2="78" y2="48" stroke="#1c1917" stroke-width="3" stroke-linecap="round"/>
+  <!-- Nostrils -->
+  <circle cx="54" cy="70" r="2" fill="#1c1917"/>
+  <circle cx="66" cy="70" r="2" fill="#1c1917"/>
+  <!-- Ears -->
+  <circle cx="32" cy="36" r="6" fill="#854d0e" stroke="#451a03" stroke-width="2"/>
+  <circle cx="88" cy="36" r="6" fill="#854d0e" stroke="#451a03" stroke-width="2"/>
+  <text x="60" y="108" font-family="Impact, sans-serif" font-size="12" fill="#a16207" text-anchor="middle" letter-spacing="1">OK I PULL UP</text>
+</svg>

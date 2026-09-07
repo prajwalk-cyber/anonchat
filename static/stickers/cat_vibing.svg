@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <defs>
+    <linearGradient id="catGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#cbd5e1"/>
+    </linearGradient>
+  </defs>
+  <!-- Headphones arc -->
+  <path d="M24 50 C24 24 96 24 96 50" stroke="#6366f1" stroke-width="5" fill="none"/>
+  <!-- Headphone ear cups -->
+  <rect x="18" y="46" width="12" height="22" rx="6" fill="#4f46e5" stroke="#312e81" stroke-width="2"/>
+  <rect x="90" y="46" width="12" height="22" rx="6" fill="#4f46e5" stroke="#312e81" stroke-width="2"/>
+  <!-- Cat Ears -->
+  <polygon points="32,48 42,22 56,42" fill="url(#catGrad)" stroke="#94a3b8" stroke-width="2"/>
+  <polygon points="36,44 42,28 50,42" fill="#f472b6"/>
+  <polygon points="88,48 78,22 64,42" fill="url(#catGrad)" stroke="#94a3b8" stroke-width="2"/>
+  <polygon points="84,44 78,28 70,42" fill="#f472b6"/>
+  <!-- Head -->
+  <circle cx="60" cy="60" r="34" fill="url(#catGrad)" stroke="#94a3b8" stroke-width="2.5"/>
+  <!-- Happy Closed Curved Eyes -->
+  <path d="M42 58 Q48 50 54 58" stroke="#0f172a" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M66 58 Q72 50 78 58" stroke="#0f172a" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- Pink cute nose & mouth -->
+  <polygon points="60,65 57,68 63,68" fill="#f472b6"/>
+  <path d="M54 71 Q60 76 66 71" stroke="#0f172a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- Music notes -->
+  <text x="16" y="28" font-size="16" fill="#818cf8">♪</text>
+  <text x="96" y="24" font-size="18" fill="#ec4899">♫</text>
+  <text x="60" y="108" font-family="Impact, sans-serif" font-size="12" fill="#6366f1" text-anchor="middle" letter-spacing="1">VIBING</text>
+</svg>

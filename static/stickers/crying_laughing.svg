@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <defs>
+    <radialGradient id="cryLaugh" cx="40%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#fde047"/>
+      <stop offset="85%" stop-color="#eab308"/>
+      <stop offset="100%" stop-color="#ca8a04"/>
+    </radialGradient>
+  </defs>
+  <circle cx="60" cy="60" r="48" fill="url(#cryLaugh)"/>
+  <!-- Arched Squint Eyes -->
+  <path d="M32 50 C38 40 48 40 54 50" stroke="#78350f" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+  <path d="M66 50 C72 40 82 40 88 50" stroke="#78350f" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+  <!-- Big Laugh Open Smile -->
+  <path d="M34 68 C34 94 86 94 86 68 Z" fill="#78350f"/>
+  <path d="M40 68 C45 74 75 74 80 68 Z" fill="#ffffff"/>
+  <path d="M48 84 C54 78 66 78 72 84 C66 92 54 92 48 84 Z" fill="#f43f5e"/>
+  <!-- Giant Tears Shooting Out -->
+  <path d="M14 52 C18 42 32 46 30 58 C28 66 18 64 14 52 Z" fill="#38bdf8"/>
+  <path d="M106 52 C102 42 88 46 90 58 C92 66 102 64 106 52 Z" fill="#38bdf8"/>
+</svg>

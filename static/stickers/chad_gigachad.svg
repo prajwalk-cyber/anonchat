@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <defs>
+    <linearGradient id="goldBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="glowGold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+  </defs>
+  <rect x="6" y="6" width="108" height="108" rx="24" fill="url(#goldBg)" stroke="#fbbf24" stroke-width="3"/>
+  <!-- Sharp jawline face silhouette -->
+  <path d="M38 32 L82 32 L78 62 L60 94 L42 62 Z" fill="#f59e0b" opacity="0.2"/>
+  <!-- Sunglasses -->
+  <polygon points="30,42 56,44 54,62 34,60" fill="#000" stroke="#fbbf24" stroke-width="2.5"/>
+  <polygon points="64,44 90,42 86,60 66,62" fill="#000" stroke="#fbbf24" stroke-width="2.5"/>
+  <line x1="55" y1="45" x2="65" y2="45" stroke="#fbbf24" stroke-width="3"/>
+  <!-- Sunglass shine -->
+  <line x1="34" y1="46" x2="44" y2="58" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+  <line x1="68" y1="47" x2="78" y2="59" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+  <!-- Smirk / Beard Jawline -->
+  <path d="M46 72 C54 75 66 75 74 70" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <polygon points="60,86 52,94 68,94" fill="#d97706"/>
+  <text x="60" y="108" font-family="Impact, sans-serif" font-size="11" font-weight="bold" fill="#fde68a" text-anchor="middle" letter-spacing="2">CHAD</text>
+</svg>

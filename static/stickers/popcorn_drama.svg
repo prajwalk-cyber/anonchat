@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <defs>
+    <linearGradient id="popGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="100%" stop-color="#facc15"/>
+    </linearGradient>
+  </defs>
+  <!-- Popcorn cloud kernels -->
+  <circle cx="42" cy="38" r="14" fill="url(#popGrad)" stroke="#ca8a04" stroke-width="2"/>
+  <circle cx="60" cy="28" r="16" fill="url(#popGrad)" stroke="#ca8a04" stroke-width="2"/>
+  <circle cx="78" cy="38" r="14" fill="url(#popGrad)" stroke="#ca8a04" stroke-width="2"/>
+  <circle cx="52" cy="44" r="12" fill="url(#popGrad)" stroke="#ca8a04" stroke-width="2"/>
+  <circle cx="70" cy="44" r="12" fill="url(#popGrad)" stroke="#ca8a04" stroke-width="2"/>
+  <!-- Bucket (Red & White Stripes) -->
+  <polygon points="32,50 88,50 80,110 40,110" fill="#dc2626" stroke="#991b1b" stroke-width="3"/>
+  <polygon points="44,50 52,50 49,110 43,110" fill="#ffffff"/>
+  <polygon points="60,50 68,50 67,110 59,110" fill="#ffffff"/>
+  <polygon points="76,50 84,50 79,110 73,110" fill="#ffffff"/>
+  <!-- Label badge -->
+  <rect x="42" y="72" width="36" height="18" rx="4" fill="#fef08a" stroke="#ca8a04" stroke-width="1.5"/>
+  <text x="60" y="85" font-family="sans-serif" font-size="9" font-weight="bold" fill="#78350f" text-anchor="middle">DRAMA</text>
+</svg>
