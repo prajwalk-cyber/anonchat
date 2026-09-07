@@ -67,9 +67,9 @@ def get_automod_config() -> Dict[str, Any]:
     """Retrieve current real-time AI auto-moderation settings."""
     return {
         "enabled": database.get_setting("ai_realtime_automod", "1") == "1",
-        "mode": database.get_setting("ai_automod_mode", "delete_and_ban"),
+        "mode": database.get_setting("ai_automod_mode", "warn_and_flag"),
         "model": database.get_setting("ai_automod_model", "qwen2.5:0.5b"),
-        "purge": database.get_setting("ai_automod_purge", "1") == "1"
+        "purge": database.get_setting("ai_automod_purge", "0") == "1"
     }
 
 
@@ -77,12 +77,13 @@ def set_automod_config(enabled: Optional[bool] = None, mode: Optional[str] = Non
     """Update real-time AI auto-moderation settings."""
     if enabled is not None:
         database.set_setting("ai_realtime_automod", "1" if enabled else "0")
-    if mode is not None and mode in ("delete_and_ban", "delete_only"):
+    if mode is not None and mode in ("warn_and_flag", "warn_only", "delete_only", "delete_and_ban"):
         database.set_setting("ai_automod_mode", mode)
     if model is not None:
         database.set_setting("ai_automod_model", model)
     if purge is not None:
         database.set_setting("ai_automod_purge", "1" if purge else "0")
+
 
 
 
@@ -643,54 +644,53 @@ async def moderate_incoming_message(msg: Dict[str, Any], manager: Any = None) ->
 
         # Execute Autonomous Real-Time Moderation Actions
         if violation_detected:
-            automod_mode = database.get_setting("ai_automod_mode", "delete_and_ban")
-            purge_enabled = database.get_setting("ai_automod_purge", "1") == "1"
-            should_ban = (automod_mode == "delete_and_ban") or (severity == "high")
+            automod_mode = database.get_setting("ai_automod_mode", "warn_and_flag")
+            should_delete = automod_mode != "warn_only"
 
-            # 1. Real-time Post Deletion
-            database.delete_message(post_num)
-            if manager:
-                try:
-                    await manager.broadcast_delete(post_num)
-                except Exception:
-                    pass
-
-            purged_count = 0
-            # 2. Real-time Author Ban & Disconnect
-            if should_ban and ip:
-                database.set_ban_status(ip, True)
+            # 1. Real-time Post Deletion (removes harmful content from board)
+            if should_delete:
+                database.delete_message(post_num)
                 if manager:
                     try:
-                        await manager.kick_ip(ip)
+                        await manager.broadcast_delete(post_num)
                     except Exception:
                         pass
 
-                # 3. Real-time Author Purge (if enabled)
-                if purge_enabled:
-                    purged_count, post_nums = database.delete_all_from_ip(ip)
-                    if manager and post_nums:
-                        try:
-                            await manager.broadcast_purge(ip, post_nums)
-                        except Exception:
-                            pass
+            # 2. Issue Direct Warning to the Author (NO BAN, NO KICK)
+            public_id = msg.get("public_id")
+            warning_msg = f"⚠️ Warning: Your post #{post_num} was flagged for: {reason}. Please keep discussions respectful. (You have NOT been banned)."
+            if manager and public_id:
+                try:
+                    await manager.send_to_user(public_id, {
+                        "type": "moderation_warning",
+                        "reason": reason,
+                        "message": warning_msg,
+                        "post_num": post_num
+                    })
+                except Exception:
+                    pass
 
-            action_type = "delete_and_ban" if should_ban else "delete"
+            # 3. Note the Offending IP in Moderation Database (Flagged IPs Tab)
+            action_type = "Warned (No Ban)"
+            content_snippet = content[:300] if content else (f"[Image: {image_name}]" if image_name else "")
             database.log_ai_moderation(
                 post_num=post_num,
                 anon_name=anon_name,
                 ip=ip,
-                action=f"Auto-{action_type}",
-                reason=reason
+                action=action_type,
+                reason=reason,
+                content=content_snippet
             )
 
-            # 4. Real-time event notification to host
+            # 4. Real-time event notification to Host Console (updates Flagged IPs in real time)
             event_data = {
                 "action": action_type,
                 "post_num": post_num,
                 "anon_name": anon_name,
                 "ip": ip,
                 "reason": reason,
-                "purged_count": purged_count,
+                "content": content_snippet,
+                "purged_count": 0,
                 "timestamp": time.strftime("%H:%M:%S")
             }
             if manager:

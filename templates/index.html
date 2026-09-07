@@ -573,7 +573,7 @@
         </button>
       </div>
 
-      <!-- Console Navigation Tabs: Devices vs Groups vs AI vs Feedbacks -->
+      <!-- Console Navigation Tabs: Devices vs Groups vs Flagged IPs vs AI vs Feedbacks -->
       <div class="console-tabs">
         <button id="tab-host-devices" class="console-tab-btn active" onclick="switchHostTab('devices')">
           <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-user"></use></svg>
@@ -583,13 +583,13 @@
           <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-users"></use></svg>
           Groups (<span id="host-group-count">0</span>)
         </button>
+        <button id="tab-host-flagged" class="console-tab-btn" onclick="switchHostTab('flagged')">
+          <svg class="ui-icon ui-icon-xs" aria-hidden="true" style="color:#f59e0b;"><use href="#icon-shield"></use></svg>
+          Flagged IPs (<span id="host-flagged-count">0</span>)
+        </button>
         <button id="tab-host-ai" class="console-tab-btn" onclick="switchHostTab('ai')">
           <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-cpu"></use></svg>
           AI Co-Pilot (Qwen)
-        </button>
-        <button id="tab-host-ailogs" class="console-tab-btn" onclick="switchHostTab('ailogs')">
-          <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-shield"></use></svg>
-          AI Logs (<span id="host-ailog-count">0</span>)
         </button>
         <button id="tab-host-feedbacks" class="console-tab-btn" onclick="switchHostTab('feedbacks')">
           <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-message-square"></use></svg>
@@ -684,20 +684,21 @@
             </div>
             <div style="display:flex; align-items:center; gap:8px;">
               <select id="ai-automod-mode-select" class="theme-selector" style="font-size:11px; padding:2px 6px; height:26px;" onchange="updateAiAutomodMode(this.value)" title="Action taken when violating content is detected in real time">
+                <option value="warn_and_flag">⚠️ Warn User &amp; Flag IP (No Ban)</option>
+                <option value="warn_only">Warn User Only (Keep Post)</option>
+                <option value="delete_only">Delete Post Only (No Ban)</option>
                 <option value="delete_and_ban">Delete Post &amp; Ban Author</option>
-                <option value="delete_only">Delete Post Only</option>
               </select>
-              <button class="btn-top" style="font-size:11px; padding:3px 8px; background:rgba(239, 68, 68, 0.12); color:#ef4444; border:1px solid rgba(239,68,68,0.3);" onclick="switchHostTab('ailogs')" title="View audit log of deleted posts and banned authors">
+              <button class="btn-top" style="font-size:11px; padding:3px 8px; background:rgba(245, 158, 11, 0.12); color:#f59e0b; border:1px solid rgba(245,158,11,0.3);" onclick="switchHostTab('flagged')" title="View flagged and warned IPs">
                 <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-shield"></use></svg>
-                <span>Audit Logs (<span id="ai-mod-count">0</span>)</span>
+                <span>Flagged IPs (<span id="ai-mod-count">0</span>)</span>
               </button>
             </div>
           </div>
           <div style="display:flex; align-items:center; justify-content:space-between; margin-top:8px; font-size:11px; color:var(--text-date); flex-wrap:wrap; gap:6px;">
-            <label style="display:inline-flex; align-items:center; gap:5px; cursor:pointer;" title="Purge all previous messages from the banned author">
-              <input type="checkbox" id="ai-automod-purge-cb" checked onchange="updateAiAutomodPurge(this.checked)">
-              <span>Purge all author's previous messages on ban</span>
-            </label>
+            <span style="color:#f59e0b; font-weight:500;">
+              ✨ Automatic Ban Disabled: Violations trigger in-chat warning &amp; log IP to Flagged IPs tab.
+            </span>
             <span style="display:inline-flex; align-items:center; gap:4px;">
               <span>Fast AI Model:</span>
               <select id="ai-automod-model-select" class="theme-selector" style="font-size:10.5px; padding:1px 5px; height:22px;" onchange="updateAiAutomodModel(this.value)" title="Local model used for sub-second real-time evaluation">
@@ -810,16 +811,22 @@
         </div>
       </div>
 
-      <!-- Pane 5: Real-Time AI Moderation Audit Logs -->
-      <div id="host-pane-ailogs" style="display:none;">
+      <!-- Pane 5: Flagged & Warned IPs (Audit & Review) -->
+      <div id="host-pane-flagged" style="display:none;">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; gap:10px; flex-wrap:wrap;">
           <p style="font-size: 12px; color: var(--text-date); margin: 0;">
-            Live audit trail of real-time actions taken by the AI Auto-Moderator:
+            <strong style="color:#f59e0b;">⚠️ Flagged IPs &amp; Warnings:</strong> Users violating guidelines receive instant in-chat warnings. Offending IPs are logged below without being automatically banned.
           </p>
-          <button class="btn-top" style="font-size:11px; padding:3px 8px;" onclick="loadHostAiLogs()">
-            <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-refresh"></use></svg>
-            Refresh Logs
-          </button>
+          <div style="display:flex; gap:6px;">
+            <button class="btn-top" style="font-size:11px; padding:3px 8px;" onclick="loadHostAiLogs()">
+              <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-refresh"></use></svg>
+              Refresh
+            </button>
+            <button class="btn-top" style="font-size:11px; padding:3px 8px; background:rgba(239,68,68,0.15); color:#ef4444;" onclick="clearHostFlaggedLogs()">
+              <svg class="ui-icon ui-icon-xs" aria-hidden="true"><use href="#icon-trash"></use></svg>
+              Clear All
+            </button>
+          </div>
         </div>
 
         <div style="overflow-x: auto;">
@@ -827,11 +834,13 @@
             <thead>
               <tr>
                 <th>Time</th>
-                <th>Post #</th>
+                <th>Flagged IP</th>
                 <th>Author</th>
-                <th>IP Address</th>
-                <th>Action Taken</th>
-                <th>Reason</th>
+                <th>Post #</th>
+                <th>Violation / Trigger</th>
+                <th>Message Snippet</th>
+                <th>Status</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody id="host-ailogs-tbody">
@@ -840,6 +849,7 @@
           </table>
         </div>
       </div>
+
     </div>
   </div>
   {% endif %}

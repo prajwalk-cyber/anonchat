@@ -263,11 +263,12 @@ function handleWSEvent(data) {
   } else if (data.type === "ai_moderation_event") {
     const ev = data.event || {};
     if (isHost) {
-      const actLabel = ev.action === "delete_and_ban" ? "Deleted & Banned" : "Deleted";
-      showToast(`🛡️ AI Auto-Mod: ${actLabel} Post #${ev.post_num} (${escapeHtml(ev.anon_name || 'Author')}) - ${escapeHtml(ev.reason || '')}`, "error");
+      showToast(`⚠️ Flagged Post #${ev.post_num} (${escapeHtml(ev.anon_name || 'Author')} - ${escapeHtml(ev.ip || '')}): ${escapeHtml(ev.reason || '')} [Warned]`, "warning", 6000);
       incrementAiModBadge();
       appendAiLogToDOM(ev);
     }
+  } else if (data.type === "moderation_warning") {
+    showModerationWarning(data.reason, data.message);
   } else if (data.type === "purge_ip") {
     document.querySelectorAll(`.chat-box[data-ip="${data.ip}"]`).forEach(el => el.remove());
   } else if (data.type === "announcement") {
@@ -770,30 +771,34 @@ let currentAiModel = "qwen2.5:1.5b";
 function switchHostTab(tab) {
   const tabDevicesBtn = document.getElementById("tab-host-devices");
   const tabGroupsBtn = document.getElementById("tab-host-groups");
+  const tabFlaggedBtn = document.getElementById("tab-host-flagged") || document.getElementById("tab-host-ailogs");
   const tabAiBtn = document.getElementById("tab-host-ai");
-  const tabAiLogsBtn = document.getElementById("tab-host-ailogs");
   const tabFeedbacksBtn = document.getElementById("tab-host-feedbacks");
   const paneDevices = document.getElementById("host-pane-devices");
   const paneGroups = document.getElementById("host-pane-groups");
+  const paneFlagged = document.getElementById("host-pane-flagged") || document.getElementById("host-pane-ailogs");
   const paneAi = document.getElementById("host-pane-ai");
-  const paneAiLogs = document.getElementById("host-pane-ailogs");
   const paneFeedbacks = document.getElementById("host-pane-feedbacks");
 
   if (tabDevicesBtn) tabDevicesBtn.classList.remove("active");
   if (tabGroupsBtn) tabGroupsBtn.classList.remove("active");
+  if (tabFlaggedBtn) tabFlaggedBtn.classList.remove("active");
   if (tabAiBtn) tabAiBtn.classList.remove("active");
-  if (tabAiLogsBtn) tabAiLogsBtn.classList.remove("active");
   if (tabFeedbacksBtn) tabFeedbacksBtn.classList.remove("active");
   if (paneDevices) paneDevices.style.display = "none";
   if (paneGroups) paneGroups.style.display = "none";
+  if (paneFlagged) paneFlagged.style.display = "none";
   if (paneAi) paneAi.style.display = "none";
-  if (paneAiLogs) paneAiLogs.style.display = "none";
   if (paneFeedbacks) paneFeedbacks.style.display = "none";
 
   if (tab === "groups") {
     if (tabGroupsBtn) tabGroupsBtn.classList.add("active");
     if (paneGroups) paneGroups.style.display = "block";
     loadHostGroups();
+  } else if (tab === "flagged" || tab === "ailogs") {
+    if (tabFlaggedBtn) tabFlaggedBtn.classList.add("active");
+    if (paneFlagged) paneFlagged.style.display = "block";
+    loadHostAiLogs();
   } else if (tab === "ai") {
     if (tabAiBtn) tabAiBtn.classList.add("active");
     if (paneAi) paneAi.style.display = "block";
@@ -801,10 +806,6 @@ function switchHostTab(tab) {
     loadAiAutomodConfig();
     const chatInput = document.getElementById("ai-chat-input");
     if (chatInput) chatInput.focus();
-  } else if (tab === "ailogs") {
-    if (tabAiLogsBtn) tabAiLogsBtn.classList.add("active");
-    if (paneAiLogs) paneAiLogs.style.display = "block";
-    loadHostAiLogs();
   } else if (tab === "feedbacks") {
     if (tabFeedbacksBtn) tabFeedbacksBtn.classList.add("active");
     if (paneFeedbacks) paneFeedbacks.style.display = "block";
@@ -895,13 +896,20 @@ async function updateAiAutomodModel(model) {
   } catch (e) {}
 }
 
+function showModerationWarning(reason, message) {
+  const warningText = message || `⚠️ Community Guideline Warning: Your message was flagged for ${reason || 'inappropriate content'}. Please keep discussions respectful. (You have NOT been banned).`;
+  showToast(warningText, "warning", 8000);
+}
+
 let aiModCount = 0;
 function incrementAiModBadge() {
   aiModCount++;
   const b1 = document.getElementById("ai-mod-count");
   const b2 = document.getElementById("host-ailog-count");
+  const b3 = document.getElementById("host-flagged-count");
   if (b1) b1.textContent = aiModCount;
   if (b2) b2.textContent = aiModCount;
+  if (b3) b3.textContent = aiModCount;
 }
 
 function appendAiLogToDOM(ev) {
@@ -911,18 +919,21 @@ function appendAiLogToDOM(ev) {
   if (emptyRow) emptyRow.remove();
 
   const tr = document.createElement("tr");
-  const isBan = ev.action === "delete_and_ban" || (ev.action && ev.action.includes("ban"));
-  const badgeColor = isBan ? "#ef4444" : "#f59e0b";
-  const badgeLabel = isBan ? "Deleted & Banned" : "Deleted Post";
   const timeStr = ev.timestamp || new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  const contentSnippet = ev.content ? escapeHtml(ev.content) : "-";
 
   tr.innerHTML = `
-    <td style="font-size:11px; color:var(--text-date);">${timeStr}</td>
-    <td style="font-weight:600;">#${ev.post_num || '-'}</td>
+    <td style="font-size:11px; color:var(--text-date); white-space:nowrap;">${timeStr}</td>
+    <td><code style="font-size:11px; font-weight:600; color:var(--text-main);">${escapeHtml(ev.ip || 'Unknown')}</code></td>
     <td>${escapeHtml(ev.anon_name || 'Anonymous')}</td>
-    <td><code style="font-size:10.5px;">${escapeHtml(ev.ip || 'Unknown')}</code></td>
-    <td><span style="font-size:10.5px; padding:2px 6px; border-radius:4px; font-weight:600; color:#fff; background:${badgeColor};">${badgeLabel}</span></td>
-    <td style="font-size:11.5px; color:var(--text-main);">${escapeHtml(ev.reason || 'Safety policy')}</td>
+    <td style="font-weight:600;">#${ev.post_num || '-'}</td>
+    <td style="font-size:11.5px; font-weight:600; color:#f59e0b;">${escapeHtml(ev.reason || 'Flagged')}</td>
+    <td style="font-size:11px; color:var(--text-date); max-width:200px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" title="${contentSnippet}">${contentSnippet}</td>
+    <td><span style="font-size:10px; padding:2px 7px; border-radius:10px; font-weight:700; color:#fff; background:#f59e0b;">⚠️ Warned</span></td>
+    <td>
+      <button class="btn-top" style="font-size:10px; padding:2px 6px; margin-right:4px;" onclick="muteIpPrompt('${escapeHtml(ev.ip || '')}')">Mute</button>
+      <button class="btn-top" style="font-size:10px; padding:2px 6px; background:rgba(255,255,255,0.08);" onclick="this.closest('tr').remove()">Dismiss</button>
+    </td>
   `;
   tbody.insertBefore(tr, tbody.firstChild);
 }
@@ -930,7 +941,7 @@ function appendAiLogToDOM(ev) {
 async function loadHostAiLogs() {
   const tbody = document.getElementById("host-ailogs-tbody");
   if (!tbody) return;
-  tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:var(--text-date); padding:20px;">Loading audit logs...</td></tr>`;
+  tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; color:var(--text-date); padding:20px;">Loading flagged logs...</td></tr>`;
   try {
     const res = await fetch("/api/host/ai/logs");
     const data = await res.json();
@@ -938,34 +949,65 @@ async function loadHostAiLogs() {
       aiModCount = data.logs.length;
       const b1 = document.getElementById("ai-mod-count");
       const b2 = document.getElementById("host-ailog-count");
+      const b3 = document.getElementById("host-flagged-count");
       if (b1) b1.textContent = aiModCount;
       if (b2) b2.textContent = aiModCount;
+      if (b3) b3.textContent = aiModCount;
 
       if (data.logs.length === 0) {
-        tbody.innerHTML = `<tr class="no-logs-row"><td colspan="6" style="text-align:center; color:var(--text-date); padding:20px;">No moderation events recorded yet. AI Guardian is actively monitoring chat in real time.</td></tr>`;
+        tbody.innerHTML = `<tr class="no-logs-row"><td colspan="8" style="text-align:center; color:var(--text-date); padding:25px;">No flagged incidents recorded yet. Violating posts trigger automatic in-chat warnings and are noted here without auto-bans.</td></tr>`;
         return;
       }
 
       tbody.innerHTML = data.logs.map(log => {
-        const isBan = log.action && (log.action.includes("ban") || log.action.includes("Ban"));
-        const badgeColor = isBan ? "#ef4444" : "#f59e0b";
         const dateStr = log.created_at ? new Date(log.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }) : '-';
+        const contentSnippet = log.content ? escapeHtml(log.content) : "-";
         return `
           <tr>
-            <td style="font-size:11px; color:var(--text-date);">${dateStr}</td>
-            <td style="font-weight:600;">#${log.post_num || '-'}</td>
+            <td style="font-size:11px; color:var(--text-date); white-space:nowrap;">${dateStr}</td>
+            <td><code style="font-size:11px; font-weight:600; color:var(--text-main);">${escapeHtml(log.ip || 'Unknown')}</code></td>
             <td>${escapeHtml(log.anon_name || 'Anonymous')}</td>
-            <td><code style="font-size:10.5px;">${escapeHtml(log.ip || 'Unknown')}</code></td>
-            <td><span style="font-size:10.5px; padding:2px 6px; border-radius:4px; font-weight:600; color:#fff; background:${badgeColor};">${escapeHtml(log.action || 'Moderated')}</span></td>
-            <td style="font-size:11.5px; color:var(--text-main);">${escapeHtml(log.reason || 'Safety violation')}</td>
+            <td style="font-weight:600;">#${log.post_num || '-'}</td>
+            <td style="font-size:11.5px; font-weight:600; color:#f59e0b;">${escapeHtml(log.reason || 'Flagged')}</td>
+            <td style="font-size:11px; color:var(--text-date); max-width:200px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" title="${contentSnippet}">${contentSnippet}</td>
+            <td><span style="font-size:10px; padding:2px 7px; border-radius:10px; font-weight:700; color:#fff; background:#f59e0b;">⚠️ Warned</span></td>
+            <td>
+              <button class="btn-top" style="font-size:10px; padding:2px 6px; margin-right:4px;" onclick="muteIpPrompt('${escapeHtml(log.ip || '')}')">Mute</button>
+              <button class="btn-top" style="font-size:10px; padding:2px 6px; background:rgba(255,255,255,0.08);" onclick="dismissFlaggedLog(${log.id})">Dismiss</button>
+            </td>
           </tr>
         `;
       }).join("");
     }
   } catch (e) {
-    tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:#ef4444; padding:20px;">Failed to load audit logs.</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; color:#ef4444; padding:20px;">Failed to load flagged logs.</td></tr>`;
   }
 }
+
+async function dismissFlaggedLog(logId) {
+  try {
+    const res = await fetch(`/api/host/ai/logs/delete/${logId}`, { method: "POST" });
+    const data = await res.json();
+    if (data.status === "ok") {
+      loadHostAiLogs();
+    }
+  } catch (e) {}
+}
+
+async function clearHostFlaggedLogs() {
+  if (!confirm("Are you sure you want to clear all logged flagged IPs?")) return;
+  try {
+    const res = await fetch("/api/host/ai/logs/clear", { method: "POST" });
+    const data = await res.json();
+    if (data.status === "ok") {
+      showToast("Cleared all flagged IP logs", "success");
+      loadHostAiLogs();
+    }
+  } catch (e) {
+    showToast("Failed to clear logs", "error");
+  }
+}
+
 
 async function scanAndAutoClean() {
   const box = document.getElementById("ai-chat-messages");

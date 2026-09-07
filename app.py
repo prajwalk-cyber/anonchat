@@ -908,8 +908,25 @@ async def host_ai_logs(request: Request):
     client_ip = get_client_ip(request)
     if not is_host_client(client_ip, request.cookies, request=request):
         raise HTTPException(status_code=403, detail="Access restricted to host laptop")
-    logs = database.get_ai_moderation_logs(limit=60)
+    logs = database.get_ai_moderation_logs(limit=100)
     return {"status": "ok", "logs": logs}
+
+@app.post("/api/host/ai/logs/delete/{log_id}")
+async def host_ai_log_delete(log_id: int, request: Request):
+    client_ip = get_client_ip(request)
+    if not is_host_client(client_ip, request.cookies, request=request):
+        raise HTTPException(status_code=403, detail="Access restricted to host laptop")
+    success = database.delete_ai_moderation_log(log_id)
+    return {"status": "ok", "deleted": success}
+
+@app.post("/api/host/ai/logs/clear")
+async def host_ai_logs_clear(request: Request):
+    client_ip = get_client_ip(request)
+    if not is_host_client(client_ip, request.cookies, request=request):
+        raise HTTPException(status_code=403, detail="Access restricted to host laptop")
+    count = database.clear_ai_moderation_logs()
+    return {"status": "ok", "cleared_count": count}
+
 
 @app.post("/api/host/ai/chat")
 async def host_ai_chat(request: Request):

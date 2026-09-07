@@ -132,9 +132,16 @@ def init_db():
         ip TEXT,
         action TEXT,
         reason TEXT,
+        content TEXT,
         created_at TEXT
     );
     """)
+
+    cur.execute("PRAGMA table_info(ai_moderation_logs)")
+    cols_ai = [row["name"] for row in cur.fetchall()]
+    if "content" not in cols_ai:
+        cur.execute("ALTER TABLE ai_moderation_logs ADD COLUMN content TEXT;")
+
 
     cur.execute("""
     CREATE TABLE IF NOT EXISTS server_settings (
@@ -854,28 +861,47 @@ def set_setting(key: str, value: str):
     conn.commit()
     conn.close()
 
-def log_ai_moderation(post_num: Optional[int], anon_name: str, ip: str, action: str, reason: str) -> int:
+def log_ai_moderation(post_num: Optional[int], anon_name: str, ip: str, action: str, reason: str, content: str = "") -> int:
     now = datetime.utcnow().isoformat()
     conn = get_db_connection()
     cur = conn.cursor()
     cur.execute("""
-        INSERT INTO ai_moderation_logs (post_num, anon_name, ip, action, reason, created_at)
-        VALUES (?, ?, ?, ?, ?, ?)
-    """, (post_num, anon_name or "Unknown", ip or "", action, reason, now))
+        INSERT INTO ai_moderation_logs (post_num, anon_name, ip, action, reason, content, created_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+    """, (post_num, anon_name or "Unknown", ip or "", action, reason, content or "", now))
     lid = cur.lastrowid
     conn.commit()
     conn.close()
     return lid
 
-def get_ai_moderation_logs(limit: int = 50) -> List[Dict[str, Any]]:
+def get_ai_moderation_logs(limit: int = 100) -> List[Dict[str, Any]]:
     conn = get_db_connection()
     cur = conn.cursor()
     cur.execute("""
-        SELECT id, post_num, anon_name, ip, action, reason, created_at
+        SELECT id, post_num, anon_name, ip, action, reason, content, created_at
         FROM ai_moderation_logs
         ORDER BY id DESC LIMIT ?
     """, (limit,))
     rows = [dict(r) for r in cur.fetchall()]
     conn.close()
     return rows
+
+def delete_ai_moderation_log(log_id: int) -> bool:
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute("DELETE FROM ai_moderation_logs WHERE id = ?", (log_id,))
+    deleted = cur.rowcount > 0
+    conn.commit()
+    conn.close()
+    return deleted
+
+def clear_ai_moderation_logs() -> int:
+    conn = get_db_connection()
+    cur = conn.cursor()
+    cur.execute("DELETE FROM ai_moderation_logs")
+    deleted = cur.rowcount
+    conn.commit()
+    conn.close()
+    return deleted
+
 
